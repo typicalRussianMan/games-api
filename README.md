@@ -14,6 +14,14 @@ Authorize user by email and password.
 | :--------: | :-------: |
 | [LoginDto](#logindto) | [TokenDto](#tokendto) |
 
+### [POST] /api/auth/register
+
+Creates a new user.
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| [UserToCreateDto](#usertocreatedto) | [TokenDto](#tokendto) |
+
 ## Models
 
 ### LoginDto
