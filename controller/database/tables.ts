@@ -5,7 +5,7 @@ CREATE TABLE users (
   last_name text not null,
   nick_name text not null,
   email text not null,
-  role int,
+  role int not null,
   password text not null
 );
 `;

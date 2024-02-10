@@ -6,25 +6,80 @@ The app in this repo is deployed at [https://games-app-pdmt.onrender.com/](https
 
 ## Endpoints
 
-### [GET] /api/users
+### [POST] /api/auth/login
 
-Test endpoint
+Authorize user by email and password.
 
-### Returns
-
-[TestModelDto](#testmodeldto)
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| [LoginDto](#logindto) | [TokenDto](#tokendto) |
 
 ## Models
 
-### TestModelDto
+### LoginDto
 
 ```ts
-interface TestModelDto {
+interface LoginDto {
 
-  /* Test. */
-  qwe: string;
+  /** Email. */
+  email: string;
 
-  /* Test. */
-  asd: number;
+  /** Password. */
+  password: number;
 }
+```
+
+### TokenDto
+
+```ts
+interface TokenDto {
+
+  /** Token. */
+  token: string;
+}
+```
+
+### UserToCreateDto
+
+```ts
+interface UserToCreateDto {
+
+  /** First name. */
+  readonly firstName: string;
+
+  /** Last name. */
+  readonly lastName: string;
+
+  /** Nick name. */
+  readonly nickName: string;
+
+  /** Email. */
+  readonly email: string;
+
+  /** Role. */
+  readonly role: UserRole;
+
+  /** Password. */
+  readonly password: string;
+}
+```
+
+It depends on:
+
+- [UserRoleDto](#userroledto)
+
+### UserRoleDto
+
+```ts
+enum UserRoleDto {
+
+  /** Common user role. */
+  Common = 'Common',
+
+  /** 
+   * Company owner. 
+   * These users can manage their company and publish games. 
+   */
+  CompanyOwner = 'CompanyOwner',
+} 
 ```
