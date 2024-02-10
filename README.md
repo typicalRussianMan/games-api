@@ -1,15 +1,30 @@
-# README
+# Games app API
 
-This is the [Express](https://expressjs.com) [Hello world](https://expressjs.com/en/starter/hello-world.html) example on [Render](https://render.com).
+This is the Express API for Games app.
 
-The app in this repo is deployed at [https://express.onrender.com](https://express.onrender.com).
+The app in this repo is deployed at [https://games-app-pdmt.onrender.com/](https://games-app-pdmt.onrender.com/).
 
-## Deployment
+## Endpoints
 
-See https://render.com/docs/deploy-node-express-app or follow the steps below:
+### [GET] /api/users
 
-Create a new web service with the following values:
-  * Build Command: `yarn`
-  * Start Command: `node app.js`
+Test endpoint
 
-That's it! Your web service will be live on your Render URL as soon as the build finishes.
+### Returns
+
+[TestModelDto](#testmodeldto)
+
+## Models
+
+### TestModelDto
+
+```ts
+interface TestModelDto {
+
+  /* Test. */
+  qwe: string;
+
+  /* Test. */
+  asd: number;
+}
+```
