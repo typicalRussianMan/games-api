@@ -1,6 +1,5 @@
 import { APP_CONFIG } from './config/app.config';
 import { app } from './controller/app.controller';
-import './routes';
 import './controller/database.controller';
 
 const port = APP_CONFIG.port;
