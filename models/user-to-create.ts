@@ -2,6 +2,15 @@ import { database } from '../controller/database.controller';
 import { insertUser } from '../controller/database/sql';
 import { UserBase } from './user-base';
 import { UserMapper } from '../mappers/user.mapper';
+import { ValidationError } from './app-error';
+
+function throwError(field: keyof UserToCreate, message: string): never {
+  throw new ValidationError(
+    'Invalid user creation data',
+    field,
+    message,
+  )
+}
 
 /** User to create. */
 export class UserToCreate extends UserBase {
@@ -15,8 +24,27 @@ export class UserToCreate extends UserBase {
   }
 
   /** Validator function. */
-  public static validate(data: object): asserts data is UserToCreate {
-    super.validate(data)
+  public static validate(data: any): asserts data is UserToCreate {
+
+    if (typeof data.password !== 'string') {
+      throwError('password', 'Password is required');
+    }
+
+    if (data.password.length < 8) {
+      throwError('password', 'Your password is too short (minimum 8)');
+    }
+
+    if (
+      data.password.toLowerCase() === data.password ||
+      data.password.toUpperCase() === data.password
+    ) {
+      throwError(
+        'password',
+        'Your password should contains one uppercase or lowercase character at least',
+      );
+    }
+
+    super.validate(data);
   }
 
   /**

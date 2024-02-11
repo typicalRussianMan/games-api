@@ -1,4 +1,14 @@
 import { database } from "../controller/database.controller";
+import { isEmail } from "../utils/is-email";
+import { ValidationError } from "./app-error";
+
+function throwError(field: keyof Login, message: string): never {
+  throw new ValidationError(
+    'Invalid login data',
+    field,
+    message,
+  );
+}
 
 /** Login data. */
 export class Login {
@@ -16,7 +26,13 @@ export class Login {
 
   /** Validator function. */
   public static validate(data: any): asserts data is Login {
+    if (!isEmail(data.email)) {
+      throwError('email', 'Invalid email');
+    }
 
+    if (typeof data.password !== 'string') {
+      throwError('password', 'Invalid password');
+    }
   }
 
   /**
