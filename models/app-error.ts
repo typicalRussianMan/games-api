@@ -12,6 +12,7 @@ export class AppError extends Error {
   public constructor(errorCode: ServerResponseCode, message: string, details?: any) {
     super(message);
     this.code = errorCode;
+    this.details = details;
   }
 
   /** Converts error to JSON object. */
@@ -24,6 +25,7 @@ export class AppError extends Error {
   }
 }
 
+/** Validation error. */
 export class ValidationError extends AppError {
 
   public constructor(
