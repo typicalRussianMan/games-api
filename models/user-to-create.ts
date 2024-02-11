@@ -1,8 +1,10 @@
+import { ERROR } from 'sqlite3';
 import { database } from '../controller/database.controller';
 import { insertUser } from '../controller/database/sql';
 import { UserBase } from './user-base';
 import { UserMapper } from '../mappers/user.mapper';
-import { ValidationError } from './app-error';
+import { AppError, ValidationError } from './app-error';
+import { ServerResponseCode } from './server-response-code';
 
 function throwError(field: keyof UserToCreate, message: string): never {
   throw new ValidationError(
@@ -67,13 +69,17 @@ export class UserToCreate extends UserBase {
         ],
         err => {
           if (err) {
-            rej(err);
+            rej(new ValidationError(
+              'Invalid registration data',
+              'email',
+              'User is already exists',
+            ));
             return;
           }
 
           res();
         }
       );
-    })
+    });
   }
 }
