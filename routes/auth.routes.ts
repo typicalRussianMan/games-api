@@ -27,11 +27,11 @@ app.post('/api/auth/login', async(req, res, next) => {
   }
 });
 
-app.post('/api/auth/register', (req, res, next) => {
+app.post('/api/auth/register', async(req, res, next) => {
   try {
     UserToCreate.validate(req.body);
 
-    UserToCreate.createUser({
+    await UserToCreate.createUser({
       ...req.body,
       role: UserRole.Common,
     });

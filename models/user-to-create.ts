@@ -52,18 +52,28 @@ export class UserToCreate extends UserBase {
    * @param db Database instance.
    * @param userToCreate User.
    */
-  public static createUser(userToCreate: UserToCreate): void {
-    const user = UserMapper.toCreationData(userToCreate);
-    database.run(
-      insertUser,
-      [
-        user.first_name,
-        user.last_name,
-        user.nick_name,
-        user.email,
-        user.role,
-        user.password,
-      ],
-    );
+  public static createUser(userToCreate: UserToCreate): Promise<void> {
+    return new Promise((res, rej) => {
+      const user = UserMapper.toCreationData(userToCreate);
+      database.run(
+        insertUser,
+        [
+          user.first_name,
+          user.last_name,
+          user.nick_name,
+          user.email,
+          user.role,
+          user.password,
+        ],
+        err => {
+          if (err) {
+            rej(err);
+            return;
+          }
+
+          res();
+        }
+      );
+    })
   }
 }
