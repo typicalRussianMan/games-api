@@ -1,5 +1,7 @@
 import { app } from '../controller/app.controller';
+import { AppError } from '../models/app-error';
 import { Login } from '../models/login';
+import { ServerResponseCode } from '../models/server-response-code';
 import { Token } from '../models/token';
 import { UserRole } from '../models/user-role';
 import { UserToCreate } from '../models/user-to-create';
@@ -18,7 +20,7 @@ app.post('/api/auth/login', async(req, res) => {
     return;
   }
 
-  res.json({});
+  throw new AppError(ServerResponseCode.BadRequest, 'Invalid email or password')
 });
 
 app.post('/api/auth/register', (req, res) => {
