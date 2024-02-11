@@ -7,7 +7,7 @@ import { generateToken } from '../utils/token/generate-token';
 
 app.post('/api/auth/login', async(req, res) => {
   Login.validate(req.body)
-  
+
   const login = new Login(req.body);
   const isValidLogin = await Login.checkValidation(login);
 
@@ -15,6 +15,7 @@ app.post('/api/auth/login', async(req, res) => {
     res.json(new Token({
       token: generateToken(login).toString(),
     }));
+    return;
   }
 
   res.json({});

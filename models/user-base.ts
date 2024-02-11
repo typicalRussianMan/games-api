@@ -46,7 +46,7 @@ export class UserBase {
       throwError('lastName', 'Invalid last name');
     }
 
-    if (typeof data.nickName !== 'boolean') {
+    if (typeof data.nickName !== 'string') {
       throwError('nickName', 'Invalid nick name');
     }
 
