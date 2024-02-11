@@ -51,7 +51,6 @@ export class UserToCreate extends UserBase {
 
   /**
    * Creates new user in database.
-   * @param db Database instance.
    * @param userToCreate User.
    */
   public static createUser(userToCreate: UserToCreate): Promise<void> {
