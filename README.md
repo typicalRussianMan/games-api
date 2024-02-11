@@ -91,3 +91,55 @@ enum UserRoleDto {
   CompanyOwner = 'CompanyOwner',
 } 
 ```
+
+### ServerResponseCodeDto
+
+```ts
+/** Statuses for server responses */
+enum ServerResponseCodeDto {
+
+  /** Positive response. */
+  OK = 200,
+
+  /** Invalid request body. */
+  BadRequest = 400,
+
+  /** Attempting to access the resource without authorization. */
+  Unauthorized = 401,
+
+  /** Blocking user access to the resource. */
+  Forbidden = 403,
+
+  /** Resource not found. */
+  NotFound = 404,
+
+  /** Internal server error. */
+  InternalError = 500,
+}
+```
+
+## Error models
+
+### ValidationErrorDto
+
+```ts
+interface ValidationErrorDto {
+
+  /** Server response code. */
+  readonly code: ServerResponseCode;
+
+  /** General information about the error. */
+  readonly message: string;
+
+  /** Detailed information about the error. */
+  readonly details: {
+
+    /** Key - field containing the error, value - description of the error. */
+    readonly [fieldName: string]: string;
+  }
+}
+```
+
+It depends on:
+
+- [ServerResponseCodeDto](#serverresponsecodedto)
