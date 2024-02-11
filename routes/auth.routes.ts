@@ -7,31 +7,39 @@ import { UserRole } from '../models/user-role';
 import { UserToCreate } from '../models/user-to-create';
 import { generateToken } from '../utils/token/generate-token';
 
-app.post('/api/auth/login', async(req, res) => {
-  Login.validate(req.body)
+app.post('/api/auth/login', async(req, res, next) => {
+  try {
+    Login.validate(req.body);
 
-  const login = new Login(req.body);
-  const isValidLogin = await Login.checkValidation(login);
+    const login = new Login(req.body);
+    const isValidLogin = await Login.checkValidation(login);
 
-  if (isValidLogin) {
-    res.json(new Token({
-      token: generateToken(login).toString(),
-    }));
-    return;
+    if (isValidLogin) {
+      res.json(new Token({
+        token: generateToken(login).toString(),
+      }));
+      return;
+    }
+
+    throw new AppError(ServerResponseCode.BadRequest, 'Invalid email or password');
+  } catch (err) {
+    next(err);
   }
-
-  throw new AppError(ServerResponseCode.BadRequest, 'Invalid email or password')
 });
 
-app.post('/api/auth/register', (req, res) => {
-  UserToCreate.validate(req.body);
+app.post('/api/auth/register', (req, res, next) => {
+  try {
+    UserToCreate.validate(req.body);
 
-  UserToCreate.createUser({
-    ...req.body,
-    role: UserRole.Common,
-  });
+    UserToCreate.createUser({
+      ...req.body,
+      role: UserRole.Common,
+    });
 
-  res.json(new Token({
-    token: generateToken(req.body).toString(),
-  }));
+    res.json(new Token({
+      token: generateToken(req.body).toString(),
+    }));
+  } catch (err) {
+    next(err);
+  }
 });
