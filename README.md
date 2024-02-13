@@ -33,7 +33,7 @@ interface LoginDto {
   email: string;
 
   /** Password. */
-  password: number;
+  password: string;
 }
 ```
 
