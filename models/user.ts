@@ -1,7 +1,7 @@
-import { Database } from "sqlite3";
 import { UserBase } from "./user-base";
 import { UserMapper } from "../mappers/user.mapper";
 import { UserDb } from "../database-models/user.db";
+import { database } from "../controller/database.controller";
 
 /** User. */
 export class User extends UserBase {
@@ -19,7 +19,7 @@ export class User extends UserBase {
    * @param database Database instance.
    * @param email Email.
    */
-  public static getByEmail(database: Database, email: string): Promise<User | null> {
+  public static getByEmail(email: string): Promise<User | null> {
     return new Promise((res, rej) => {
       database.all(
         `SELECT * from users WHERE email='${email}';`,

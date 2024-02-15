@@ -42,3 +42,11 @@ export class ValidationError extends AppError {
     );
   }
 }
+
+/** Authorization error. */
+export class AuthorizationError extends AppError {
+
+  public constructor(message: string) {
+    super(ServerResponseCode.Unauthorized, message);
+  }
+}
