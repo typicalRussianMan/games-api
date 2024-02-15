@@ -22,6 +22,14 @@ Creates a new user.
 | :--------: | :-------: |
 | [UserToCreateDto](#usertocreatedto) | [TokenDto](#tokendto) |
 
+### [GET] /api/user
+
+Returns a user by token in Authorization header.
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| - | [UserDto](#userdto) |
+
 ## Models
 
 ### LoginDto
@@ -117,6 +125,38 @@ enum ServerResponseCodeDto {
   InternalError = 500,
 }
 ```
+
+### UserDto
+
+```ts
+interface UserDto {
+
+  /** ID. */
+  readonly id: number;
+
+  /** First name. */
+  readonly firstName: string;
+
+  /** Last name. */
+  readonly lastName: string;
+
+  /** Nick name. */
+  readonly nickName: string;
+
+  /** Email. */
+  readonly email: string;
+
+  /** Role. */
+  readonly role: UserRole;
+
+  /** Password. */
+  readonly password: string;
+}
+```
+
+It depends on:
+
+- [UserRoleDto](#userroledto)
 
 ## Error models
 
