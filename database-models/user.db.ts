@@ -11,9 +11,6 @@ export interface UserDb {
   /** Last name. */
   readonly last_name: string;
 
-  /** Nick name. */
-  readonly nick_name: string;
-
   /** Email. */
   readonly email: string;
 

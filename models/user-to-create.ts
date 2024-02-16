@@ -61,7 +61,6 @@ export class UserToCreate extends UserBase {
         [
           user.first_name,
           user.last_name,
-          user.nick_name,
           user.email,
           user.role,
           user.password,

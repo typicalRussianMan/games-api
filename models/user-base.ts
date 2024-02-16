@@ -19,9 +19,6 @@ export class UserBase {
   /** Last name. */
   public readonly lastName: string;
 
-  /** Nick name. */
-  public readonly nickName: string;
-
   /** Email. */
   public readonly email: string;
 
@@ -32,7 +29,6 @@ export class UserBase {
     this.email = data.email;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
-    this.nickName = data.nickName;
     this.role = data.role;
   }
 
@@ -44,10 +40,6 @@ export class UserBase {
 
     if (typeof data.lastName !== 'string') {
       throwError('lastName', 'Invalid last name');
-    }
-
-    if (typeof data.nickName !== 'string') {
-      throwError('nickName', 'Invalid nick name');
     }
 
     if (!isEmail(data.email)) {

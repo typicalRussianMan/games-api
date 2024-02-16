@@ -8,7 +8,6 @@ const USERS: UserToCreate[] = [
     email: 'qwe@qwe.qwe',
     firstName: 'Andrey',
     lastName: 'Skripachev',
-    nickName: 'booba',
     password: 'qwe123qwe',
     role: UserRole.Common,
   }),

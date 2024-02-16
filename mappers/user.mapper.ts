@@ -16,7 +16,6 @@ export namespace UserMapper {
       firstName: data.first_name,
       id: data.id,
       lastName: data.last_name,
-      nickName: data.nick_name,
       role: UserRoleMapper.toModel(data.role),
     });
   }
@@ -30,7 +29,6 @@ export namespace UserMapper {
       email: data.email,
       first_name: data.firstName,
       last_name: data.lastName,
-      nick_name: data.nickName,
       password: data.password,
       role: UserRoleMapper.fromModel(data.role),
     };
