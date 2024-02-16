@@ -21,19 +21,18 @@ export class User extends UserBase {
    */
   public static getByEmail(email: string): Promise<User | null> {
     return new Promise((res, rej) => {
-      database.all(
-        `SELECT * from users WHERE email='${email}';`,
+      database.all<UserDb>(
+        `SELECT * from users WHERE email='${email}' LIMIT 1;`,
         (err, rows) => {
           if (err) {
             rej(err);
           }
-
           const user = rows[0];
 
           if (user === undefined) {
             res(null);
           } else {
-            UserMapper.toUser(user as UserDb);
+            res(UserMapper.toUser(user));
           }
         }
       );

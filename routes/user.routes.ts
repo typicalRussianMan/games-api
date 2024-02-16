@@ -19,7 +19,7 @@ app.get('/api/user', async(req, res, next) => {
       throw new AuthorizationError('Cannot find user with such email');
     }
 
-    res.json(user)
+    res.json(user);
 
   } catch (err) {
     next(err);
