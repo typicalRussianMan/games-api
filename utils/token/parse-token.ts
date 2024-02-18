@@ -1,4 +1,4 @@
-import { TokenInfo } from "../../models/token-info";
+import { TokenInfo } from '../../models/token-info';
 
 /**
  * Converts string converted with `TokenInfo.toString` to TokenInfo.

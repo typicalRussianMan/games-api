@@ -1,17 +1,21 @@
-import { ERROR } from 'sqlite3';
 import { database } from '../controller/database.controller';
 import { insertUser } from '../controller/database/sql';
-import { UserBase } from './user-base';
-import { UserMapper } from '../mappers/user.mapper';
-import { AppError, ValidationError } from './app-error';
-import { ServerResponseCode } from './server-response-code';
+import { userMapper } from '../mappers/user.mapper';
 
+import { UserBase } from './user-base';
+import { ValidationError } from './app-error';
+
+/**
+ * Throws validation error.
+ * @param field Field.
+ * @param message Message.
+ */
 function throwError(field: keyof UserToCreate, message: string): never {
   throw new ValidationError(
     'Invalid user creation data',
     field,
     message,
-  )
+  );
 }
 
 /** User to create. */
@@ -25,7 +29,10 @@ export class UserToCreate extends UserBase {
     this.password = data.password;
   }
 
-  /** Validator function. */
+  /**
+   * Validator function.
+   * @param data Data.
+   */
   public static validate(data: any): asserts data is UserToCreate {
 
     if (typeof data.password !== 'string') {
@@ -55,7 +62,7 @@ export class UserToCreate extends UserBase {
    */
   public static createUser(userToCreate: UserToCreate): Promise<void> {
     return new Promise((res, rej) => {
-      const user = UserMapper.toCreationData(userToCreate);
+      const user = userMapper.fromCreationData(userToCreate);
       database.run(
         insertUser,
         [
@@ -65,7 +72,7 @@ export class UserToCreate extends UserBase {
           user.role,
           user.password,
         ],
-        err => {
+        (err: Error) => {
           if (err) {
             rej(new ValidationError(
               'Invalid registration data',
@@ -76,7 +83,7 @@ export class UserToCreate extends UserBase {
           }
 
           res();
-        }
+        },
       );
     });
   }

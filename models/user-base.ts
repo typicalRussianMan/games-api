@@ -1,7 +1,13 @@
-import { isEmail } from "../utils/is-email";
-import { ValidationError } from "./app-error";
-import { UserRole } from "./user-role";
+import { isEmail } from '../utils/is-email';
 
+import { ValidationError } from './app-error';
+import { UserRole } from './user-role';
+
+/**
+ * Throws user validation error.
+ * @param field Field.
+ * @param message Message.
+ */
 function throwError(field: keyof UserBase, message: string): never {
   throw new ValidationError(
     'Invalid user data',
@@ -32,7 +38,10 @@ export class UserBase {
     this.role = data.role;
   }
 
-  /** Validator function. */
+  /**
+   * Validator function.
+   * @param data Data.
+   */
   public static validate(data: any): asserts data is UserBase {
     if (typeof data.firstName !== 'string') {
       throwError('firstName', 'Invalid first name');

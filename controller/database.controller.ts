@@ -1,4 +1,5 @@
 import { verbose } from 'sqlite3';
+
 import { initDatabase } from './database/init';
 
 const sqlite3 = verbose();

@@ -1,7 +1,8 @@
-import { UserBase } from "./user-base";
-import { UserMapper } from "../mappers/user.mapper";
-import { UserDb } from "../database-models/user.db";
-import { database } from "../controller/database.controller";
+import { userMapper } from '../mappers/user.mapper';
+import { UserDb } from '../database-models/user.db';
+import { database } from '../controller/database.controller';
+
+import { UserBase } from './user-base';
 
 /** User. */
 export class User extends UserBase {
@@ -23,7 +24,7 @@ export class User extends UserBase {
     return new Promise((res, rej) => {
       database.all<UserDb>(
         `SELECT * from users WHERE email='${email}' LIMIT 1;`,
-        (err, rows) => {
+        (err: Error | null, rows: UserDb[]) => {
           if (err) {
             rej(err);
           }
@@ -32,9 +33,9 @@ export class User extends UserBase {
           if (user === undefined) {
             res(null);
           } else {
-            res(UserMapper.toUser(user));
+            res(userMapper.toUser(user));
           }
-        }
+        },
       );
     });
   }

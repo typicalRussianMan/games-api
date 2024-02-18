@@ -1,5 +1,3 @@
-import { Database } from 'sqlite3';
-
 import { UserToCreate } from '../../../models/user-to-create';
 import { UserRole } from '../../../models/user-role';
 
@@ -17,7 +15,7 @@ const USERS: UserToCreate[] = [
  * Adds users to database.
  * @param db Database.
  */
-export function addUsers(db: Database): void {
+export function addUsers(): void {
   for (const user of USERS) {
     UserToCreate.createUser(user);
   }

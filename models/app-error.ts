@@ -1,4 +1,4 @@
-import { ServerResponseCode } from "./server-response-code";
+import { ServerResponseCode } from './server-response-code';
 
 /** App error. */
 export class AppError extends Error {
@@ -7,9 +7,9 @@ export class AppError extends Error {
   public readonly code: ServerResponseCode;
 
   /** Detailed info about error. */
-  public readonly details?: any;
+  public readonly details?: unknown;
 
-  public constructor(errorCode: ServerResponseCode, message: string, details?: any) {
+  public constructor(errorCode: ServerResponseCode, message: string, details?: unknown) {
     super(message);
     this.code = errorCode;
     this.details = details;
@@ -21,7 +21,7 @@ export class AppError extends Error {
       code: this.code,
       message: this.message,
       details: this.details,
-    }
+    };
   }
 }
 
