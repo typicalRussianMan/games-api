@@ -1,6 +1,7 @@
-import { UserRoleDb } from "./user-role.db";
+import { UserRoleDb } from './user-role.db';
 
-export interface UserDb {
+/** User. */
+export type UserDb = {
 
   /** ID. */
   readonly id: number;
@@ -19,4 +20,4 @@ export interface UserDb {
 
   /** Password. */
   readonly password: string;
-}
+};

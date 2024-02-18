@@ -1,5 +1,6 @@
-import { Database } from "sqlite3";
-import { insertGameCategory } from "../sql";
+import { Database } from 'sqlite3';
+
+import { insertGameCategory } from '../sql';
 
 const GAME_CATEGORIES: string[][] = [
   ['Arcade'],

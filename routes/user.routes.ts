@@ -1,7 +1,7 @@
-import { app } from "../controller/app.controller";
-import { AuthorizationError } from "../models/app-error";
-import { User } from "../models/user";
-import { parseToken } from "../utils/token/parse-token";
+import { app } from '../controller/app.controller';
+import { AuthorizationError } from '../models/app-error';
+import { User } from '../models/user';
+import { parseToken } from '../utils/token/parse-token';
 
 app.get('/api/user', async(req, res, next) => {
   try {
@@ -24,4 +24,4 @@ app.get('/api/user', async(req, res, next) => {
   } catch (err) {
     next(err);
   }
-})
+});

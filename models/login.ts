@@ -1,7 +1,14 @@
-import { database } from "../controller/database.controller";
-import { isEmail } from "../utils/is-email";
-import { ValidationError } from "./app-error";
+import { database } from '../controller/database.controller';
+import { UserDb } from '../database-models/user.db';
+import { isEmail } from '../utils/is-email';
 
+import { ValidationError } from './app-error';
+
+/**
+ * Throws login validation error.
+ * @param field Field.
+ * @param message Message.
+ */
 function throwError(field: keyof Login, message: string): never {
   throw new ValidationError(
     'Invalid login data',
@@ -24,7 +31,10 @@ export class Login {
     this.password = data.password;
   }
 
-  /** Validator function. */
+  /**
+   * Validator function.
+   * @param data Data to be validated.
+   */
   public static validate(data: any): asserts data is Login {
     if (!isEmail(data.email)) {
       throwError('email', 'Invalid email');
@@ -41,19 +51,19 @@ export class Login {
    */
   public static checkValidation(data: Login): Promise<boolean> {
     return new Promise((res, rej) => {
-      database.all(
+      database.all<UserDb>(
         `SELECT * from users
         WHERE email='${data.email}' and password='${data.password}'
         LIMIT 1`,
-        (err, rows) => {
+        (err: Error, rows: UserDb[]) => {
           if (err) {
             rej(err);
             return;
           }
 
           res(rows[0] !== undefined);
-        }
+        },
       );
-    })
+    });
   }
 }

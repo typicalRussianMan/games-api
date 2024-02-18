@@ -10,6 +10,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   rules: {
     'linebreak-style': 'off',
-    'naming-convention': 'off'
+    'naming-convention': 'off',
+    'no-console': 'off',
   },
 }

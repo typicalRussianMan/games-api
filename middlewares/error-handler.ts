@@ -1,6 +1,8 @@
 import { ErrorRequestHandler } from 'express';
+
 import { AppError } from '../models/app-error';
 
+/** Error handler middleware. */
 export function errorHandler(): ErrorRequestHandler {
   return (err, _req, res, _next) => {
     if (err instanceof AppError) {
@@ -14,5 +16,5 @@ export function errorHandler(): ErrorRequestHandler {
     res
       .status(500)
       .json(err);
-  }
+  };
 }
