@@ -11,4 +11,16 @@ export class CompanyFull extends Company {
     super(data);
     this.addresses = data.addresses;
   }
+
+  /**
+   * Validation function.
+   * @param data Data.
+   */
+  public static async asyncValidate(data: CompanyFull): Promise<CompanyFull> {
+    await super.asyncValidate(data);
+
+    data.addresses.forEach(Address.validate);
+
+    return data;
+  }
 }

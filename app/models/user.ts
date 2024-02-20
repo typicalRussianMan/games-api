@@ -17,7 +17,6 @@ export class User extends UserBase {
 
   /**
    * Gets user by email.
-   * @param database Database instance.
    * @param email Email.
    */
   public static getByEmail(email: string): Promise<User | null> {
@@ -28,6 +27,31 @@ export class User extends UserBase {
           if (err) {
             rej(err);
           }
+          const user = rows[0];
+
+          if (user === undefined) {
+            res(null);
+          } else {
+            res(userMapper.toUser(user));
+          }
+        },
+      );
+    });
+  }
+
+  /**
+   * Gets user by ID.
+   * @param id ID.
+   */
+  public static getById(id: number): Promise<User | null> {
+    return new Promise((res, rej) => {
+      database.all<UserDb>(
+        `SELECT * from users where id='${id}' LIMIT 1;`,
+        (err: Error | null, rows: UserDb[]) => {
+          if (err) {
+            rej(err);
+          }
+
           const user = rows[0];
 
           if (user === undefined) {
