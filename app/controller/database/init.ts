@@ -21,6 +21,6 @@ export async function initDatabase(database: Database): Promise<void> {
   }
 
   await addUsers();
-  addGameCategories(database);
+  await addGameCategories(database);
   await addCompanies();
 }

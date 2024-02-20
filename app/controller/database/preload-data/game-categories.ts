@@ -26,8 +26,14 @@ const GAME_CATEGORIES: string[][] = [
  * Adds game categories to database.
  * @param db Database instance.
  */
-export function addGameCategories(db: Database): void {
+export async function addGameCategories(db: Database): Promise<void> {
   for (const category of GAME_CATEGORIES) {
-    db.run(insertGameCategory, category);
+
+    // eslint-disable-next-line no-await-in-loop
+    await new Promise(res => {
+      db.run(insertGameCategory, category, () => {
+        res(undefined);
+      });
+    });
   }
 }
