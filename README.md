@@ -30,6 +30,14 @@ Returns a user by token in Authorization header.
 | :--------: | :-------: |
 | - | [UserDto](#userdto) |
 
+### [GET] /api/games/categories
+
+Returns list of the game categories.
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| - | [GameCategoryDto](#gamecategorydto) |
+
 ## Models
 
 ### LoginDto
@@ -157,6 +165,19 @@ interface UserDto {
 It depends on:
 
 - [UserRoleDto](#userroledto)
+
+### GameCategoryDto
+
+```ts
+interface GameCategoryDto {
+
+  /** ID. */
+  readonly id: number;
+
+  /** Name. */
+  readonly name: string;
+}
+```
 
 ## Error models
 
