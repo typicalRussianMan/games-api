@@ -29,3 +29,17 @@ export const insertAddress = `
 INSERT INTO company_address (lat, lng, title, company_id)
 VALUES (?, ?, ?, ?)
 `;
+
+/** SQL script to select games. */
+export const selectGameLite = `
+SELECT
+  g.id,
+  g.name,
+  json_object(
+    'id', c.id,
+    'name', c.name,
+    'address', c.address
+  ) as company
+FROM games g
+JOIN view_companies c ON g.company_id = c.id;
+`;

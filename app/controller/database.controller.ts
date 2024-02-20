@@ -1,6 +1,6 @@
 import { verbose } from 'sqlite3';
 
-import { initDatabase } from './database/init';
+import { initDatabase, initViews } from './database/init';
 
 const sqlite3 = verbose();
 
@@ -11,5 +11,6 @@ database.serialize();
 (async() => {
   console.log('-------------- Init database --------------');
   await initDatabase(database);
+  initViews(database);
   console.log('-------------- Database is ready ----------');
 })();
