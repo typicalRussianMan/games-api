@@ -1,6 +1,5 @@
-import { Database } from 'sqlite3';
-
 import { insertGameCategory } from '../sql';
+import { database } from '../../database.controller';
 
 const GAME_CATEGORIES: string[][] = [
   ['Arcade'],
@@ -22,16 +21,13 @@ const GAME_CATEGORIES: string[][] = [
   ['Action'],
 ];
 
-/**
- * Adds game categories to database.
- * @param db Database instance.
- */
-export async function addGameCategories(db: Database): Promise<void> {
+/** Adds game categories to database. */
+export async function addGameCategories(): Promise<void> {
   for (const category of GAME_CATEGORIES) {
 
     // eslint-disable-next-line no-await-in-loop
     await new Promise(res => {
-      db.run(insertGameCategory, category, () => {
+      database.run(insertGameCategory, category, () => {
         res(undefined);
       });
     });

@@ -4,6 +4,7 @@ import { TABLES } from './tables';
 import { addUsers } from './preload-data/users';
 import { addGameCategories } from './preload-data/game-categories';
 import { addCompanies } from './preload-data/companies';
+import { addGames } from './preload-data/games';
 
 /**
  * Initializes database.
@@ -21,6 +22,11 @@ export async function initDatabase(database: Database): Promise<void> {
   }
 
   await addUsers();
-  await addGameCategories(database);
+  console.log('✓ Insert users');
+  await addGameCategories();
+  console.log('✓ Insert game categories');
   await addCompanies();
+  console.log('✓ Insert companies');
+  await addGames();
+  console.log('✓ Insert mock users');
 }

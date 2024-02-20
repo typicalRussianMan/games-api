@@ -20,7 +20,7 @@ VALUES (?, ?);
 
 /** SQL script to insert new company. */
 export const insertGame = `
-INSERT INTO companies (name, company_id, category_id)
+INSERT INTO games (name, company_id, category_id)
 VALUES (?, ?, ?)
 `;
 
