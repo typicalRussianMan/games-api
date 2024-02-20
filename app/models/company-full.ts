@@ -1,3 +1,6 @@
+import { database } from '../controller/database.controller';
+import { insertCompany } from '../controller/database/sql';
+
 import { Address } from './address';
 import { Company } from './company';
 
@@ -22,5 +25,25 @@ export class CompanyFull extends Company {
     data.addresses.forEach(Address.validate);
 
     return data;
+  }
+
+  /**
+   * Adds company to database.
+   * @param company Company.
+   */
+  public static addToDatabase(company: Company): Promise<void> {
+    return new Promise((res, rej) => {
+      database.run(
+        insertCompany,
+        [company.name, company.ownerId],
+        (err: Error | null) => {
+          if (err) {
+            rej(err);
+          }
+
+          res(undefined);
+        },
+      );
+    });
   }
 }

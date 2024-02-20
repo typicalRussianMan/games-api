@@ -3,6 +3,7 @@ import { Database } from 'sqlite3';
 import { TABLES } from './tables';
 import { addUsers } from './preload-data/users';
 import { addGameCategories } from './preload-data/game-categories';
+import { addCompanies } from './preload-data/companies';
 
 /**
  * Initializes database.
@@ -21,4 +22,5 @@ export async function initDatabase(database: Database): Promise<void> {
 
   await addUsers();
   addGameCategories(database);
+  await addCompanies();
 }

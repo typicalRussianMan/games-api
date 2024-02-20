@@ -23,3 +23,9 @@ export const insertGame = `
 INSERT INTO companies (name, company_id, category_id)
 VALUES (?, ?, ?)
 `;
+
+/** SQL script to insert new address. */
+export const insertAddress = `
+INSERT INTO company_address (lat, lng, title, company_id)
+VALUES (?, ?, ?, ?)
+`;

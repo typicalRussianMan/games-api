@@ -30,6 +30,7 @@ CREATE TABLE company_address (
   id integer primary key autoincrement,
   lat float not null,
   lng float not null,
+  title text not null,
   company_id integer not null,
   foreign key(company_id) references companies(id)
 )

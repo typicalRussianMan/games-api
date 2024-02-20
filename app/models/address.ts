@@ -1,4 +1,8 @@
+import { database } from '../controller/database.controller';
+import { insertAddress } from '../controller/database/sql';
+
 import { ValidationError } from './app-error';
+import { Company } from './company';
 
 /**
  * Throws address validation error.
@@ -55,5 +59,26 @@ export class Address {
     if (data.lng < -180 || data.lng > 180) {
       throwError('lng', 'Incorrect longitude value');
     }
+  }
+
+  /**
+   * Adds new address to database.
+   * @param address Address.
+   * @param companyId Company ID.
+   */
+  public static addToDatabase(address: Address, companyId: Company['id']): Promise<void> {
+    return new Promise((res, rej) => {
+      database.run(
+        insertAddress,
+        [address.lat, address.lng, address.title, companyId],
+        (err: Error | null) => {
+          if (err) {
+            rej(err);
+          }
+
+          res(undefined);
+        },
+      );
+    });
   }
 }
