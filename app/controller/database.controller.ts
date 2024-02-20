@@ -8,6 +8,8 @@ const sqlite3 = verbose();
 export const database = new sqlite3.Database(':memory:', sqlite3.OPEN_READWRITE);
 database.serialize();
 
-console.log('-------------- Init database --------------');
-initDatabase(database);
-console.log('-------------- Database is ready ----------');
+(async() => {
+  console.log('-------------- Init database --------------');
+  await initDatabase(database);
+  console.log('-------------- Database is ready ----------');
+})();

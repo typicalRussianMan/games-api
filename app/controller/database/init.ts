@@ -8,7 +8,7 @@ import { addGameCategories } from './preload-data/game-categories';
  * Initializes database.
  * @param database Database instance.
  */
-export function initDatabase(database: Database): void {
+export async function initDatabase(database: Database): Promise<void> {
   console.log('-- Init tables');
 
   for (const tableSeed of TABLES) {
@@ -19,6 +19,6 @@ export function initDatabase(database: Database): void {
     });
   }
 
-  addUsers();
+  await addUsers();
   addGameCategories(database);
 }

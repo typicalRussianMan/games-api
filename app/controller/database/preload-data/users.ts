@@ -50,8 +50,10 @@ const USERS: UserToCreate[] = [
  * Adds users to database.
  * @param db Database.
  */
-export function addUsers(): void {
+export async function addUsers(): Promise<void> {
   for (const user of USERS) {
-    UserToCreate.createUser(user);
+
+    // eslint-disable-next-line no-await-in-loop
+    await UserToCreate.createUser(user);
   }
 }
