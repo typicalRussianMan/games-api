@@ -36,7 +36,7 @@ Returns list of the game categories.
 
 | Accepts    | Returns   |
 | :--------: | :-------: |
-| - | [GameCategoryDto](#gamecategorydto) |
+| - | [GameCategoryDto[]](#gamecategorydto) |
 
 ## Models
 
