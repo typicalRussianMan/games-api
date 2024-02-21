@@ -1,8 +1,8 @@
 const VIEW_COMPANIES = `
 CREATE VIEW view_companies AS
 SELECT
-  c.id AS id,
-  c.name AS name,
+  c.id,
+  c.name,
   json_object(
     'lat', a.lat,
     'lng', a.lng,

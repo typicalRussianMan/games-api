@@ -2,7 +2,7 @@ import { database } from '../controller/database.controller';
 import { insertAddress } from '../controller/database/sql';
 
 import { ValidationError } from './app-error';
-import { Company } from './company';
+import { CompanyBase } from './company-base';
 
 /**
  * Throws address validation error.
@@ -16,9 +16,6 @@ function throwError(field: keyof Address, message: string): never {
 /** Address. */
 export class Address {
 
-  /** ID. */
-  public readonly id: number;
-
   /** Latitude. */
   public readonly lat: number;
 
@@ -29,7 +26,6 @@ export class Address {
   public readonly title: string;
 
   public constructor(data: Address) {
-    this.id = data.id;
     this.lat = data.lat;
     this.lng = data.lng;
     this.title = data.title;
@@ -66,7 +62,7 @@ export class Address {
    * @param address Address.
    * @param companyId Company ID.
    */
-  public static addToDatabase(address: Address, companyId: Company['id']): Promise<void> {
+  public static addToDatabase(address: Address, companyId: CompanyBase['id']): Promise<void> {
     return new Promise((res, rej) => {
       database.run(
         insertAddress,
