@@ -1,30 +1,38 @@
 import { Address } from '../../../models/address';
-import { CompanyFull } from '../../../models/company-full';
+import { Company } from '../../../models/company';
 
-const COMPANIES: readonly CompanyFull[] = [
-  new CompanyFull({
+const COMPANIES: readonly Company[] = [
+  new Company({
     addresses: [
       new Address({
         lat: 56.014189,
         lng: 92.874995,
-        id: 0,
         title: 'Surikova St, 45',
       }),
+      new Address({
+        lat: 56.009320,
+        lng: 92.856867,
+        title: 'ул. Дзержинского',
+      }),
     ],
-    id: 0,
+    id: 1,
     name: 'Green house',
     ownerId: 5,
   }),
-  new CompanyFull({
+  new Company({
     addresses: [
       new Address({
         lat: 56.014413,
         lng: 92.855920,
-        id: 0,
         title: 'Kvant',
       }),
+      new Address({
+        lat: 56.015720,
+        lng: 92.882221,
+        title: 'ул. Парижской Комунны',
+      }),
     ],
-    id: 1,
+    id: 2,
     name: 'Benedict',
     ownerId: 5,
   }),
@@ -35,7 +43,7 @@ export async function addCompanies(): Promise<void> {
   for (const company of COMPANIES) {
 
     // eslint-disable-next-line no-await-in-loop
-    await CompanyFull.addToDatabase(company);
+    await Company.addToDatabase(company);
 
     for (const address of company.addresses) {
       // eslint-disable-next-line no-await-in-loop
