@@ -29,3 +29,35 @@ export const insertAddress = `
 INSERT INTO company_address (lat, lng, title, company_id)
 VALUES (?, ?, ?, ?)
 `;
+
+/** SQL script to select full company. */
+export const selectCompaniesFull = `
+SELECT
+  c.id,
+  c.name,
+  json_group_array(json_object(
+    'lat', a.lat,
+    'lng', a.lng,
+    'title', a.title
+  )) as addresses
+from companies c
+join company_address a on a.company_id = c.id
+group by c.id;
+`;
+
+/** SQL script to select games. */
+export const selectGames = `
+SELECT
+  g.name,
+  g.id,
+  g.play_count,
+  g.category,
+  json_object(
+    'id', c.id,
+    'name', c.name,
+    'address', c.address
+  ) as company
+FROM view_games g
+JOIN view_companies c
+WHERE g.company_id = c.id
+`;
