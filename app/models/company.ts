@@ -1,4 +1,9 @@
+import { database } from '../controller/database.controller';
+import { insertCompany } from '../controller/database/sql';
+
+import { Address } from './address';
 import { ValidationError } from './app-error';
+import { CompanyBase } from './company-base';
 import { User } from './user';
 import { UserRole } from './user-role';
 
@@ -11,21 +16,18 @@ function throwError(field: keyof Company, message: string): never {
   throw new ValidationError('Invalid company information', field, message);
 }
 
-/** Company. */
-export class Company {
+/** Company lite. */
+export class Company extends CompanyBase {
 
-  /** ID. */
-  public readonly id: number;
-
-  /** Name. */
-  public readonly name: string;
+  /** Address. */
+  public readonly addresses: readonly Address[];
 
   /** Owner ID. */
   public readonly ownerId: number;
 
   public constructor(data: Company) {
-    this.id = data.id;
-    this.name = data.name;
+    super(data);
+    this.addresses = data.addresses;
     this.ownerId = data.ownerId;
   }
 
@@ -34,21 +36,44 @@ export class Company {
    * @param data Data.
    */
   public static async asyncValidate(data: Company): Promise<Company> {
+    super.validate(data);
 
-    if (typeof data.name !== 'string') {
-      throwError('name', 'Name is required');
+    if (typeof data.ownerId !== 'number') {
+      throwError('ownerId', 'Invalid ownerId');
     }
 
     const user = await User.getById(data.ownerId);
 
     if (user === null) {
-      throwError('ownerId', 'Cannot find user');
+      throwError('ownerId', 'Unknown user');
     }
 
     if (user.role !== UserRole.CompanyOwner) {
-      throwError('ownerId', 'User isn\'t company owner');
+      throwError('ownerId', 'You don\'t have permissions to this action');
     }
 
+    data.addresses.forEach(Address.validate);
+
     return data;
+  }
+
+  /**
+   * Adds company to database.
+   * @param company Company.
+   */
+  public static addToDatabase(company: Company): Promise<void> {
+    return new Promise((res, rej) => {
+      database.run(
+        insertCompany,
+        [company.name, company.ownerId],
+        (err: Error | null) => {
+          if (err) {
+            rej(err);
+          }
+
+          res(undefined);
+        },
+      );
+    });
   }
 }

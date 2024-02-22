@@ -1,8 +1,8 @@
 import { Address } from './address';
-import { Company } from './company';
+import { CompanyBase } from './company-base';
 
 /** Company lite. */
-export class CompanyLite extends Company {
+export class CompanyLite extends CompanyBase {
 
   /** Address. */
   public readonly address: Address;
