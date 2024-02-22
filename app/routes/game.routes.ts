@@ -10,3 +10,13 @@ app.get('/api/games/categories', async(_req, res, next) => {
     next(err);
   }
 });
+
+app.get('/api/games', (req, res, next) => {
+  try {
+    const { limit, offset, lat, lng } = req.query;
+
+    res.json({ message: 'Booba' });
+  } catch (err) {
+    next(err);
+  }
+});
