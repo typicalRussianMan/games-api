@@ -14,11 +14,4 @@ database.serialize();
   await initDatabase(database);
   initViews(database);
   console.log('-------------- Database is ready ----------');
-  database.all(selectGames, (e, data) => {
-    if (e) {
-      console.log(e);
-    } else {
-      console.log(data);
-    }
-  });
 })();

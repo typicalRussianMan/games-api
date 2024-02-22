@@ -58,6 +58,6 @@ SELECT
     'address', c.address
   ) as company
 FROM view_games g
-JOIN view_companies c
-WHERE g.company_id = c.id
+LEFT JOIN view_companies c ON g.company_id = c.id
+GROUP BY g.id
 `;
