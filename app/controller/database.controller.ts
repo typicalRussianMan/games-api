@@ -1,7 +1,6 @@
 import { verbose } from 'sqlite3';
 
 import { initDatabase, initViews } from './database/init';
-import { selectGames } from './database/sql';
 
 const sqlite3 = verbose();
 
