@@ -64,6 +64,6 @@ GROUP BY g.id
 
 /** SQL script to select games count. */
 export const selectGamesCount = `
-SELECT COUNT(*)
+SELECT COUNT(*) as count
 FROM games
 `;

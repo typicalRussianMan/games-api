@@ -1,5 +1,6 @@
 import { selectGames, selectGamesCount } from '../controller/database/sql';
 import { allAsync } from '../controller/database/utils/all-async';
+import { CountDb } from '../database-models/count.db';
 import { GameDb } from '../database-models/game.db';
 import { gameMapper } from '../mappers/game.mapper';
 
@@ -64,7 +65,7 @@ export class Game {
     `;
 
     const result = await allAsync<GameDb>(sql, [limit, offset]);
-    const [count] = await allAsync<number>(selectGamesCount);
+    const [{ count }] = await allAsync<CountDb>(selectGamesCount);
 
     return new PagedList({
       limit,
