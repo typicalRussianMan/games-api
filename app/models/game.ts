@@ -4,24 +4,21 @@ import { CountDb } from '../database-models/count.db';
 import { GameDb } from '../database-models/game.db';
 import { gameMapper } from '../mappers/game.mapper';
 
+import { Bounds } from './bounds';
 import { CompanyLite } from './company-lite';
 import { GameCategory } from './game-category';
-import { MapPoint } from './map-point';
 import { PagedList } from './paged-list';
 
 type SelectGameOptions = {
 
   /** Point. */
-  readonly point: MapPoint;
+  readonly bounds: Bounds;
 
   /** Limit. */
   readonly limit?: number;
 
   /** Offset. */
   readonly offset?: number;
-
-  /** Distance. */
-  readonly distance?: number;
 };
 
 /** Game. */

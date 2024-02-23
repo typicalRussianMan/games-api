@@ -2,7 +2,6 @@ import { app } from '../controller/app.controller';
 import { AppError } from '../models/app-error';
 import { Game } from '../models/game';
 import { GameCategory } from '../models/game-category';
-import { MapPoint } from '../models/map-point';
 import { ServerResponseCode } from '../models/server-response-code';
 
 app.get('/api/games/categories', async(_req, res, next) => {
@@ -17,18 +16,25 @@ app.get('/api/games/categories', async(_req, res, next) => {
 
 app.get('/api/games', async(req, res, next) => {
   try {
-    const { lat, lng, limit, offset } = req.query;
+    const { left, top, right, bottom, limit, offset } = req.query;
 
-    if (typeof lat !== 'string' || typeof lng !== 'string') {
+    if (
+      typeof left !== 'string' || typeof top !== 'string' ||
+      typeof right !== 'string' || typeof bottom !== 'string'
+    ) {
       throw new AppError(
         ServerResponseCode.BadRequest,
-        'Your request should contain point coordinates',
+        'Your request should contains bounds (left, top, right and bottom)',
       );
     }
 
     const gameList = await Game.selectGames({
-      point: MapPoint.fromLatLng(Number(lat), Number(lng)),
-      distance: 100,
+      bounds: {
+        bottom: Number(bottom),
+        left: Number(left),
+        right: Number(right),
+        top: Number(top),
+      },
       limit: limit ? Number(limit) : undefined,
       offset: offset ? Number(offset) : undefined,
     });
