@@ -1,4 +1,4 @@
-import { database } from '../controller/database.controller';
+import { allAsync } from '../controller/database/utils/all-async';
 import { GameCategoryDb } from '../database-models/game-category.db';
 import { gameCategoryMapper } from '../mappers/game-category.mapper';
 
@@ -17,15 +17,8 @@ export class GameCategory {
   }
 
   /** Gets game categories from DB. */
-  public static getAll(): Promise<readonly GameCategory[]> {
-    return new Promise((res, rej) => {
-      database.all<GameCategoryDb>('SELECT * from game_categories', (err: Error | null, data) => {
-        if (err) {
-          rej(err);
-        }
-
-        res(data.map(gameCategoryMapper.toModel));
-      });
-    });
+  public static async getAll(): Promise<readonly GameCategory[]> {
+    const result = await allAsync<GameCategoryDb>('SELECT * FROM game_categories');
+    return result.map(gameCategoryMapper.toModel);
   }
 }

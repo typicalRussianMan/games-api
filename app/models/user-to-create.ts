@@ -1,6 +1,6 @@
-import { database } from '../controller/database.controller';
 import { insertUser } from '../controller/database/sql';
 import { userMapper } from '../mappers/user.mapper';
+import { runAsync } from '../controller/database/utils/run-async';
 
 import { UserBase } from './user-base';
 import { ValidationError } from './app-error';
@@ -60,10 +60,10 @@ export class UserToCreate extends UserBase {
    * Creates new user in database.
    * @param userToCreate User.
    */
-  public static createUser(userToCreate: UserToCreate): Promise<void> {
-    return new Promise((res, rej) => {
+  public static async createUser(userToCreate: UserToCreate): Promise<void> {
+    try {
       const user = userMapper.fromCreationData(userToCreate);
-      database.run(
+      await runAsync(
         insertUser,
         [
           user.first_name,
@@ -72,19 +72,9 @@ export class UserToCreate extends UserBase {
           user.role,
           user.password,
         ],
-        (err: Error) => {
-          if (err) {
-            rej(new ValidationError(
-              'Invalid registration data',
-              'email',
-              'User is already exists',
-            ));
-            return;
-          }
-
-          res();
-        },
       );
-    });
+    } catch (err) {
+      throwError('email', 'User is already exists');
+    }
   }
 }

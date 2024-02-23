@@ -1,5 +1,5 @@
-import { database } from '../controller/database.controller';
 import { insertGame } from '../controller/database/sql';
+import { runAsync } from '../controller/database/utils/run-async';
 
 /** Game base. */
 export class GameBase {
@@ -24,18 +24,6 @@ export class GameBase {
    * @param game Game.
    */
   public static addToDatabase(game: GameBase): Promise<void> {
-    return new Promise((res, rej) => {
-      database.run(
-        insertGame,
-        [game.name, game.companyId, game.categoryId],
-        (err: Error | null) => {
-          if (err) {
-            rej(err);
-          }
-
-          res();
-        },
-      );
-    });
+    return runAsync(insertGame, [game.name, game.companyId, game.categoryId]);
   }
 }

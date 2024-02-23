@@ -1,5 +1,5 @@
-import { database } from '../controller/database.controller';
 import { insertAddress } from '../controller/database/sql';
+import { runAsync } from '../controller/database/utils/run-async';
 
 import { ValidationError } from './app-error';
 import { CompanyBase } from './company-base';
@@ -63,18 +63,6 @@ export class Address {
    * @param companyId Company ID.
    */
   public static addToDatabase(address: Address, companyId: CompanyBase['id']): Promise<void> {
-    return new Promise((res, rej) => {
-      database.run(
-        insertAddress,
-        [address.lat, address.lng, address.title, companyId],
-        (err: Error | null) => {
-          if (err) {
-            rej(err);
-          }
-
-          res(undefined);
-        },
-      );
-    });
+    return runAsync(insertAddress, [address.lat, address.lng, address.title, companyId]);
   }
 }

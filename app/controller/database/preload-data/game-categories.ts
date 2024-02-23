@@ -1,5 +1,5 @@
 import { insertGameCategory } from '../sql';
-import { database } from '../../database.controller';
+import { runAsync } from '../utils/run-async';
 
 const GAME_CATEGORIES: string[][] = [
   ['Arcade'],
@@ -26,10 +26,6 @@ export async function addGameCategories(): Promise<void> {
   for (const category of GAME_CATEGORIES) {
 
     // eslint-disable-next-line no-await-in-loop
-    await new Promise(res => {
-      database.run(insertGameCategory, category, () => {
-        res(undefined);
-      });
-    });
+    await runAsync(insertGameCategory, category);
   }
 }
