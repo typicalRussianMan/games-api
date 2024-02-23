@@ -54,9 +54,17 @@ export class Game {
   public static async selectGames({
     limit = 10,
     offset = 0,
+    bounds,
   }: SelectGameOptions): Promise<PagedList<Game>> {
     const sql = `
       ${selectGames}
+      WHERE
+      json_extract(c.address, '$.lat')
+        BETWEEN ${bounds.top} AND ${bounds.bottom}
+        AND
+      json_extract(c.address, '$.lng')
+        BETWEEN ${bounds.left} AND ${bounds.right}
+      GROUP BY g.id
       LIMIT ?
       OFFSET ?
     `;
