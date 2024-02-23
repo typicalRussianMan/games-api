@@ -60,8 +60,8 @@ export class Game {
   }: SelectGameOptions): Promise<PagedList<Game>> {
     const sql = `
       ${selectGames}
-      LIMIT = ?
-      OFFSET = ?
+      LIMIT ?
+      OFFSET ?
     `;
 
     const result = await allAsync<GameDb>(sql, [limit, offset]);

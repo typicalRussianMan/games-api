@@ -1,6 +1,8 @@
 import { app } from '../controller/app.controller';
 import { AppError } from '../models/app-error';
+import { Game } from '../models/game';
 import { GameCategory } from '../models/game-category';
+import { MapPoint } from '../models/map-point';
 import { ServerResponseCode } from '../models/server-response-code';
 
 app.get('/api/games/categories', async(_req, res, next) => {
@@ -13,9 +15,9 @@ app.get('/api/games/categories', async(_req, res, next) => {
   }
 });
 
-app.get('/api/games', (req, res, next) => {
+app.get('/api/games', async(req, res, next) => {
   try {
-    const { lat, lng } = req.query;
+    const { lat, lng, limit, offset } = req.query;
 
     if (typeof lat !== 'string' || typeof lng !== 'string') {
       throw new AppError(
@@ -24,7 +26,14 @@ app.get('/api/games', (req, res, next) => {
       );
     }
 
-    res.json({ message: 'Booba' });
+    const gameList = await Game.selectGames({
+      point: MapPoint.fromLatLng(Number(lat), Number(lng)),
+      distance: 100,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+    });
+
+    res.json(gameList);
   } catch (err) {
     next(err);
   }
