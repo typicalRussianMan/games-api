@@ -1,3 +1,8 @@
+import { selectGames, selectGamesCount } from '../controller/database/sql';
+import { allAsync } from '../controller/database/utils/all-async';
+import { GameDb } from '../database-models/game.db';
+import { gameMapper } from '../mappers/game.mapper';
+
 import { CompanyLite } from './company-lite';
 import { GameCategory } from './game-category';
 import { MapPoint } from './map-point';
@@ -48,16 +53,24 @@ export class Game {
    * Selects games.
    * @param param0 Configuration.
    */
-  public static selectGames({
+  public static async selectGames({
     limit = 10,
     offset = 0,
   }: SelectGameOptions): Promise<PagedList<Game>> {
-    return new Promise(res => {
-      res(new PagedList({
-        items: [],
-        limit,
-        offset,
-      }));
+    const sql = `
+      ${selectGames}
+      LIMIT = ?
+      OFFSET = ?
+    `;
+
+    const result = await allAsync<GameDb>(sql, [limit, offset]);
+    const [count] = await allAsync<number>(selectGamesCount);
+
+    return new PagedList({
+      limit,
+      items: result.map(gameMapper.toModel),
+      offset,
+      totalCount: count,
     });
   }
 }
