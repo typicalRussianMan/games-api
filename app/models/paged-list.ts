@@ -1,3 +1,6 @@
+import { StrictOmit } from '../utils/types/strict-omit';
+
+type PagedListConstructor<T> = StrictOmit<PagedList<T>, 'meme'>;
 
 /** Paged list. */
 export class PagedList<T> {
@@ -15,18 +18,14 @@ export class PagedList<T> {
   public readonly items: readonly T[];
 
   /** Just left it here. */
-  public get meme(): undefined | string {
-    if (this.items.length === 0) {
-      return 'But nobody came...';
-    }
+  public meme: undefined | string;
 
-    return undefined;
-  }
-
-  public constructor(data: PagedList<T>) {
+  public constructor(data: PagedListConstructor<T>) {
     this.items = data.items;
     this.limit = data.limit;
     this.offset = data.offset;
     this.totalCount = data.totalCount;
+
+    this.meme = this.items.length === 0 ? 'But nobody came...' : undefined;
   }
 }
