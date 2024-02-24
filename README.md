@@ -38,6 +38,20 @@ Returns list of the game categories.
 | :--------: | :-------: |
 | - | [GameCategoryDto[]](#gamecategorydto) |
 
+### [GET] /api/games
+
+Returns paged list of the games.
+
+It accepts query param map like:
+
+```ts
+`/api/games?left=${number}&right=${number}&top==${number}&bottom==${number}&limit=${number}&offset=${number}`
+```
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| Query Params | [PagedListDto](#pagedlistdto)<[GameDto](#gamedto)> |
+
 ## Models
 
 ### LoginDto
@@ -176,6 +190,88 @@ interface GameCategoryDto {
 
   /** Name. */
   readonly name: string;
+}
+```
+
+### AddressDto
+
+```ts
+export interface AddressDto {
+
+  /** Latitude. */
+  readonly lat: number;
+
+  /** Longitude. */
+  readonly lng: number;
+
+  /** Human-readable address. */
+  readonly title: string;
+}
+```
+
+### CompanyLiteDto
+
+```ts
+interface CompanyLiteDto {
+
+  /** ID. */
+  readonly id: number;
+
+  /** Name. */
+  readonly name: string;
+
+  /** Address. */
+  readonly address: AddressDto;
+}
+```
+
+It depends on:
+
+- [AddressDto](#addressdto)
+
+### GameDto
+
+```ts
+interface GameDto {
+
+  /** ID. */
+  readonly id: number;
+
+  /** Name. */
+  readonly name: string;
+
+  /** Company. */
+  readonly company: CompanyLiteDto;
+
+  /** Category. */
+  readonly category: GameCategoryDto;
+
+  /** Play count. */
+  readonly playCount: number;
+}
+```
+
+It depends on:
+
+- [GameCategoryDto](#gamecategorydto)
+- [CompanyLiteDto](#companylitedto)
+
+### PagedListDto
+
+```ts
+interface PagedListDto<T> {
+
+  /** Offset. */
+  readonly offset: number;
+
+  /** Limit. */
+  readonly limit: number;
+
+  /** Total items count. */
+  readonly totalCount: number;
+
+  /** Items. */
+  readonly items: T[];
 }
 ```
 
