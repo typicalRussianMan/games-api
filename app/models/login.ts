@@ -1,5 +1,4 @@
-import { database } from '../controller/database.controller';
-import { UserDb } from '../database-models/user.db';
+import { allAsync } from '../controller/database/utils/all-async';
 import { isEmail } from '../utils/is-email';
 
 import { ValidationError } from './app-error';
@@ -49,21 +48,13 @@ export class Login {
    * Checks if login data is correct.
    * @param data Login data.
    */
-  public static checkValidation(data: Login): Promise<boolean> {
-    return new Promise((res, rej) => {
-      database.all<UserDb>(
-        `SELECT * from users
-        WHERE email='${data.email}' and password='${data.password}'
-        LIMIT 1`,
-        (err: Error, rows: UserDb[]) => {
-          if (err) {
-            rej(err);
-            return;
-          }
+  public static async checkValidation(data: Login): Promise<boolean> {
+    const result = await allAsync(`
+      SELECT * from users
+      WHERE email='${data.email}' and password='${data.password}'
+      LIMIT 1
+    `);
 
-          res(rows[0] !== undefined);
-        },
-      );
-    });
+    return result[0] !== undefined;
   }
 }

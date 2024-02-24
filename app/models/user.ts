@@ -1,6 +1,6 @@
 import { userMapper } from '../mappers/user.mapper';
 import { UserDb } from '../database-models/user.db';
-import { database } from '../controller/database.controller';
+import { allAsync } from '../controller/database/utils/all-async';
 
 import { UserBase } from './user-base';
 
@@ -19,48 +19,27 @@ export class User extends UserBase {
    * Gets user by email.
    * @param email Email.
    */
-  public static getByEmail(email: string): Promise<User | null> {
-    return new Promise((res, rej) => {
-      database.all<UserDb>(
-        `SELECT * from users WHERE email='${email}' LIMIT 1;`,
-        (err: Error | null, rows: UserDb[]) => {
-          if (err) {
-            rej(err);
-          }
-          const user = rows[0];
+  public static async getByEmail(email: string): Promise<User | null> {
+    const result = await allAsync<UserDb>(`SELECT * from users WHERE email='${email}' LIMIT 1;`);
 
-          if (user === undefined) {
-            res(null);
-          } else {
-            res(userMapper.toUser(user));
-          }
-        },
-      );
-    });
+    const user = result[0];
+
+    return user === undefined ?
+      null :
+      userMapper.toUser(user);
   }
 
   /**
    * Gets user by ID.
    * @param id ID.
    */
-  public static getById(id: number): Promise<User | null> {
-    return new Promise((res, rej) => {
-      database.all<UserDb>(
-        `SELECT * from users where id='${id}' LIMIT 1;`,
-        (err: Error | null, rows: UserDb[]) => {
-          if (err) {
-            rej(err);
-          }
+  public static async getById(id: number): Promise<User | null> {
+    const result = await allAsync<UserDb>(`SELECT * from users where id='${id}' LIMIT 1;`);
 
-          const user = rows[0];
+    const user = result[0];
 
-          if (user === undefined) {
-            res(null);
-          } else {
-            res(userMapper.toUser(user));
-          }
-        },
-      );
-    });
+    return user === undefined ?
+      null :
+      userMapper.toUser(user);
   }
 }

@@ -59,5 +59,10 @@ SELECT
   ) as company
 FROM view_games g
 LEFT JOIN view_companies c ON g.company_id = c.id
-GROUP BY g.id
+`;
+
+/** SQL script to select games count. */
+export const selectGamesCount = `
+SELECT COUNT(*) as count
+FROM games
 `;

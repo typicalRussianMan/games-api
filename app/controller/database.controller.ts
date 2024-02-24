@@ -10,7 +10,7 @@ database.serialize();
 
 (async() => {
   console.log('-------------- Init database --------------');
-  await initDatabase(database);
-  initViews(database);
+  await initDatabase();
+  initViews();
   console.log('-------------- Database is ready ----------');
 })();
