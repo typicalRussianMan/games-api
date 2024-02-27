@@ -52,6 +52,21 @@ It accepts query param map like:
 | :--------: | :-------: |
 | Query Params | [PagedListDto](#pagedlistdto)<[GameDto](#gamedto)> |
 
+### [GET] /api/games/:id
+
+Returns the game by id.
+
+It accepts query param map like:
+(Based on the coordinates passed in the query parameters, the closest address is provided)
+
+```ts
+`/api/games/1?lng=${number}&lat=${number}`;
+```
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| Query Params | [GameDto](#gamedto) |
+
 ## Models
 
 ### LoginDto

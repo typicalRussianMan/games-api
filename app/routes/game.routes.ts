@@ -44,3 +44,23 @@ app.get('/api/games', async(req, res, next) => {
     next(err);
   }
 });
+
+app.get('/api/games/:id', async(req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { lat, lng } = req.query;
+
+    const game = await Game.getGameById(
+      Number(id),
+      {
+        lat: lat === undefined ? undefined : Number(lat),
+        lng: lng === undefined ? undefined : Number(lng),
+      },
+    );
+
+    res.json(game);
+
+  } catch (err) {
+    next(err);
+  }
+});
