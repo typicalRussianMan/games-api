@@ -60,7 +60,7 @@ export class Game {
       ${selectGames}
       WHERE
       json_extract(c.address, '$.lat')
-        BETWEEN ${bounds.top} AND ${bounds.bottom}
+        BETWEEN ${bounds.bottom} AND ${bounds.top}
         AND
       json_extract(c.address, '$.lng')
         BETWEEN ${bounds.left} AND ${bounds.right}
