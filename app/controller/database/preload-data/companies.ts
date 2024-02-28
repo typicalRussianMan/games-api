@@ -7,7 +7,7 @@ const COMPANIES: readonly Company[] = [
       new Address({
         lat: 56.014189,
         lng: 92.874995,
-        title: 'Красноярск, улица Сурикова, 45',
+        title: 'Красноярск, ул. Сурикова, 45',
       }),
       new Address({
         lat: 56.009320,
@@ -34,6 +34,18 @@ const COMPANIES: readonly Company[] = [
     ],
     id: 2,
     name: 'Benedict',
+    ownerId: 5,
+  }),
+  new Company({
+    addresses: [
+      new Address({
+        lat: 56.038146,
+        lng: 93.136343,
+        title: 'Березовка, ул. Дружбы, 70',
+      }),
+    ],
+    id: 3,
+    name: 'Test company',
     ownerId: 5,
   }),
 ];
