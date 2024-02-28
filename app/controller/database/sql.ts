@@ -14,8 +14,8 @@ VALUES (?);
 
 /** SQL script to insert new company. */
 export const insertCompany = `
-INSERT INTO companies (name, user_id)
-VALUES (?, ?);
+INSERT INTO companies (name, user_id, logo_url)
+VALUES (?, ?, ?);
 `;
 
 /** SQL script to insert new company. */
@@ -35,6 +35,7 @@ export const selectCompaniesFull = `
 SELECT
   c.id,
   c.name,
+  c.logo_url,
   json_group_array(json_object(
     'lat', a.lat,
     'lng', a.lng,
@@ -55,7 +56,8 @@ SELECT
   json_object(
     'id', c.id,
     'name', c.name,
-    'address', c.address
+    'address', c.address,
+    'logo_url', c.logo_url
   ) as company
 FROM view_games g
 LEFT JOIN view_companies c ON g.company_id = c.id

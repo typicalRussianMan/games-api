@@ -8,7 +8,7 @@ import { IMapperToModel } from './mapper';
 
 /** Company mapper. */
 class CompanyMapper implements
-IMapperToModel<CompanyDb, CompanyLite> {
+IMapperToModel<CompanyLite, CompanyDb> {
 
   /** @inheritdoc */
   public toModel(data: CompanyDb): CompanyLite {
@@ -20,6 +20,7 @@ IMapperToModel<CompanyDb, CompanyLite> {
       address: addressMapper.toModel(address),
       id: data.id,
       name: data.name,
+      logoUrl: data.logo_url,
     });
   }
 }

@@ -62,6 +62,6 @@ export class Company extends CompanyBase {
    * @param company Company.
    */
   public static addToDatabase(company: Company): Promise<void> {
-    return runAsync(insertCompany, [company.name, company.ownerId]);
+    return runAsync(insertCompany, [company.name, company.ownerId, company.logoUrl]);
   }
 }

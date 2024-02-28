@@ -20,6 +20,7 @@ const INIT_TABLE_COMPANIES = `
 CREATE TABLE companies (
   id integer primary key autoincrement,
   name text not null,
+  logo_url text not null,
   user_id integer not null,
   foreign key(user_id) references users(id)
 );

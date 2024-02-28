@@ -18,9 +18,13 @@ export class CompanyBase {
   /** Name. */
   public readonly name: string;
 
+  /** Logo URL. */
+  public readonly logoUrl: string;
+
   public constructor(data: CompanyBase) {
     this.id = data.id;
     this.name = data.name;
+    this.logoUrl = data.logoUrl;
   }
 
   /**

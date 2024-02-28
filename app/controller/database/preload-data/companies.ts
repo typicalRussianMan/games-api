@@ -18,6 +18,7 @@ const COMPANIES: readonly Company[] = [
     id: 1,
     name: 'Green house',
     ownerId: 5,
+    logoUrl: 'https://static.tildacdn.com/tild3635-6661-4664-b431-346231316333/-.png',
   }),
   new Company({
     addresses: [
@@ -35,6 +36,7 @@ const COMPANIES: readonly Company[] = [
     id: 2,
     name: 'Benedict',
     ownerId: 5,
+    logoUrl: 'https://media-cdn.tripadvisor.com/media/photo-p/21/ab/34/e6/benedic-cafe.jpg',
   }),
   new Company({
     addresses: [
@@ -47,6 +49,8 @@ const COMPANIES: readonly Company[] = [
     id: 3,
     name: 'Test company',
     ownerId: 5,
+    // eslint-disable-next-line max-len
+    logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd_a_-Rkbaf-z6Wy32T8wMGp69Lknpm-lKedmhermyxlH7yHqX3lcxw14xlta8dBoeaZo&usqp=CAU',
   }),
   new Company({
     addresses: [
@@ -59,6 +63,7 @@ const COMPANIES: readonly Company[] = [
     id: 4,
     name: 'SibGAU',
     ownerId: 5,
+    logoUrl: 'https://play-lh.googleusercontent.com/NEYGtRqajdpz1mJ0GOhxQOBaD_VxKGi-yXhx8uGcwgyAGDv8Ohqql7Q4rpnv5hM1-ZAA=w240-h480-rw',
   }),
 ];
 

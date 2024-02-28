@@ -3,6 +3,7 @@ CREATE VIEW view_companies AS
 SELECT
   c.id,
   c.name,
+  c.logo_url,
   json_object(
     'lat', a.lat,
     'lng', a.lng,

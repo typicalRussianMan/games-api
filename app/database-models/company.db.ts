@@ -11,4 +11,7 @@ export type CompanyDb = {
 
   /** Address in string format. */
   readonly address: string | AddressDb;
+
+  /** Logo URL. */
+  readonly logo_url: string;
 };
