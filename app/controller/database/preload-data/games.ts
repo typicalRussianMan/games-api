@@ -26,6 +26,11 @@ const GAMES: readonly GameBase[] = [
     companyId: 3,
     name: 'Test game',
   }),
+  new GameBase({
+    categoryId: 8,
+    companyId: 4,
+    name: 'SibGAU Game',
+  }),
 ];
 
 /** Adds games to the database. */

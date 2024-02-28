@@ -48,6 +48,18 @@ const COMPANIES: readonly Company[] = [
     name: 'Test company',
     ownerId: 5,
   }),
+  new Company({
+    addresses: [
+      new Address({
+        lat: 56.013432,
+        lng: 92.870241,
+        title: 'Красноярск, ул. Ленина, 69',
+      }),
+    ],
+    id: 4,
+    name: 'SibGAU',
+    ownerId: 5,
+  }),
 ];
 
 /** Adds companies to database. */
