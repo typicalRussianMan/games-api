@@ -7,12 +7,12 @@ const COMPANIES: readonly Company[] = [
       new Address({
         lat: 56.014189,
         lng: 92.874995,
-        title: 'Surikova St, 45',
+        title: 'Красноярск, улица Сурикова, 45',
       }),
       new Address({
         lat: 56.009320,
         lng: 92.856867,
-        title: 'ул. Дзержинского',
+        title: 'Красноярск, ул. Карла Маркса, 147',
       }),
     ],
     id: 1,
@@ -24,12 +24,12 @@ const COMPANIES: readonly Company[] = [
       new Address({
         lat: 56.014413,
         lng: 92.855920,
-        title: 'Kvant',
+        title: 'Красноярск, ул. Красной Армии, 10 ст5',
       }),
       new Address({
         lat: 56.015720,
         lng: 92.882221,
-        title: 'ул. Парижской Комунны',
+        title: 'Красноярск, ул. Парижской Комунны, 42а',
       }),
     ],
     id: 2,
