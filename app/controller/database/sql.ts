@@ -20,8 +20,8 @@ VALUES (?, ?, ?);
 
 /** SQL script to insert new company. */
 export const insertGame = `
-INSERT INTO games (name, company_id, category_id)
-VALUES (?, ?, ?)
+INSERT INTO games (name, company_id, category_id, preview_url, poster_url)
+VALUES (?, ?, ?, ?, ?)
 `;
 
 /** SQL script to insert new address. */
@@ -53,6 +53,8 @@ SELECT
   g.id,
   g.play_count,
   g.category,
+  g.preview_url,
+  g.poster_url,
   json_object(
     'id', c.id,
     'name', c.name,

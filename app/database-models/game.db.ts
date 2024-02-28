@@ -18,4 +18,10 @@ export type GameDb = {
 
   /** Category. */
   readonly category: string | GameCategoryDb;
+
+  /** Preview URL. */
+  readonly preview_url: string;
+
+  /** Poster URL. */
+  readonly poster_url: string;
 };

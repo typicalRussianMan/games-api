@@ -27,6 +27,8 @@ class GameMapper implements IMapperToModel<Game, GameDb> {
       category: gameCategoryMapper.toModel(category),
       name: data.name,
       playCount: data.play_count,
+      posterUrl: data.poster_url,
+      previewUrl: data.preview_url,
     });
   }
 }

@@ -20,6 +20,8 @@ SELECT
   g.name,
   g.play_count,
   g.company_id,
+  g.preview_url,
+  g.poster_url,
   json_object('name', g_c.name, 'id', g_c.id) as category
 FROM games g
 JOIN game_categories g_c ON g.category_id = g_c.id;

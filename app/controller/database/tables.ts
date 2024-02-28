@@ -42,6 +42,8 @@ CREATE TABLE games (
   id integer primary key autoincrement,
   name text not null,
   play_count int default 0 not null,
+  preview_url text not null,
+  poster_url text not null,
   company_id integer not null,
   category_id integer not null,
   foreign key(company_id) references companies(id),

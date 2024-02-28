@@ -45,12 +45,20 @@ export class Game {
   /** Play count. */
   public readonly playCount: number;
 
+  /** Preview URL. */
+  public readonly previewUrl: string;
+
+  /** Poster URL. */
+  public readonly posterUrl: string;
+
   public constructor(data: Game) {
     this.company = data.company;
     this.id = data.id;
     this.name = data.name;
     this.category = data.category;
     this.playCount = data.playCount;
+    this.posterUrl = data.posterUrl;
+    this.previewUrl = data.previewUrl;
   }
 
   /**
@@ -77,6 +85,8 @@ export class Game {
 
     const result = await allAsync<GameDb>(sql, [limit, offset]);
     const [{ count }] = await allAsync<CountDb>(selectGamesCount);
+
+    console.log(result);
 
     return new PagedList({
       limit,
