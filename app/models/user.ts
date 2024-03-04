@@ -1,6 +1,7 @@
 import { userMapper } from '../mappers/user.mapper';
 import { UserDb } from '../database-models/user.db';
 import { allAsync } from '../controller/database/utils/all-async';
+import { runAsync } from '../controller/database/utils/run-async';
 
 import { UserBase } from './user-base';
 
@@ -41,5 +42,13 @@ export class User extends UserBase {
     return user === undefined ?
       null :
       userMapper.toUser(user);
+  }
+
+  /**
+   * Increments play count.
+   * @param user User.
+   */
+  public static incrementPlayedGamesCount(user: User): Promise<void> {
+    return runAsync(`UPDATE statistics SET games_played = games_played + 1 WHERE user_id=${user.id}`);
   }
 }

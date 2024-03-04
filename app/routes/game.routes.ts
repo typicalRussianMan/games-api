@@ -1,8 +1,12 @@
+import { RequestHandler } from 'express';
+
 import { app } from '../controller/app.controller';
 import { AppError } from '../models/app-error';
 import { Game } from '../models/game';
 import { GameCategory } from '../models/game-category';
 import { ServerResponseCode } from '../models/server-response-code';
+import { getUserFromAuthHeader } from '../utils/get-user-from-auth-header';
+import { User } from '../models/user';
 
 app.get('/api/games/categories', async(_req, res, next) => {
   try {
@@ -45,7 +49,17 @@ app.get('/api/games', async(req, res, next) => {
   }
 });
 
-app.get('/api/games/:id', async(req, res, next) => {
+const handleIncrementPlayedGames: RequestHandler = async(req, _res, next) => {
+  const user = await getUserFromAuthHeader(req);
+
+  if (user !== null) {
+    await User.incrementPlayedGamesCount(user);
+  }
+
+  next();
+};
+
+app.get('/api/games/:id', handleIncrementPlayedGames, async(req, res, next) => {
   try {
     const { id } = req.params;
     const { lat, lng } = req.query;
