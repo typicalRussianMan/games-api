@@ -82,3 +82,32 @@ export const selectGamesCount = `
 SELECT COUNT(*) as count
 FROM games
 `;
+
+/** SQL script to select user profile. */
+export const selectProfile = `
+SELECT
+  u.id,
+  u.first_name,
+  u.last_name,
+  u.email,
+  u.role,
+  u.avatar,
+  a.title,
+  json_group_array(
+    json_object(
+      'id', a.id,
+      'title', a.title,
+      'description', a.description,
+      'is_collected', CASE WHEN
+        EXISTS (SELECT 1 FROM user_achievement
+          WHERE user_id=u.id AND achievement_id=a.id
+        )
+          THEN 1
+          ELSE 0
+      END
+    )
+  ) as achievements
+FROM users u
+JOIN achievements a
+WHERE u.id=?
+`;
