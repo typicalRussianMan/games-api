@@ -36,7 +36,7 @@ Returns updated user achievements by token in Authorization header.
 
 | Accepts    | Returns   |
 | :--------: | :-------: |
-| - | [AchievementDto](#achievementdto) |
+| - | [AchievementDto](#achievementdto)[] |
 
 ### [GET] /api/games/categories
 
