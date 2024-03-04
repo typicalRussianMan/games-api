@@ -30,6 +30,14 @@ Returns a user by token in Authorization header.
 | :--------: | :-------: |
 | - | [UserDto](#userdto) |
 
+### [GET] /api/user/check-achievements
+
+Returns updated user achievements by token in Authorization header.
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| - | [AchievementDto](#achievementdto) |
+
 ### [GET] /api/games/categories
 
 Returns list of the game categories.
@@ -287,6 +295,22 @@ interface PagedListDto<T> {
 
   /** Items. */
   readonly items: T[];
+}
+```
+
+### AchievementDto
+
+```ts
+interface AchievementDto {
+
+  /** ID. */
+  readonly id: number;
+
+  /** Title. */
+  readonly title: string;
+
+  /** Description. */
+  readonly description: string;
 }
 ```
 
