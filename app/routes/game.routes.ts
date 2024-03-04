@@ -50,13 +50,18 @@ app.get('/api/games', async(req, res, next) => {
 });
 
 const handleIncrementPlayedGames: RequestHandler = async(req, _res, next) => {
-  const user = await getUserFromAuthHeader(req);
+  try {
+    const user = await getUserFromAuthHeader(req);
 
-  if (user !== null) {
-    await User.incrementPlayedGamesCount(user);
+    if (user !== null) {
+      await User.incrementPlayedGamesCount(user);
+    }
+
+    next();
+  } catch (err) {
+    next(err);
   }
 
-  next();
 };
 
 app.get('/api/games/:id', handleIncrementPlayedGames, async(req, res, next) => {
