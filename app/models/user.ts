@@ -3,13 +3,12 @@ import { userMapper } from '../mappers/user.mapper';
 import { UserDb } from '../database-models/user.db';
 import { allAsync } from '../controller/database/utils/all-async';
 import { runAsync } from '../controller/database/utils/run-async';
-import { ACHIEVEMENT_CONDITION, MAP_TYPE_TO_ACHIEVEMENT } from '../controller/database/preload-data/achievements';
 import { statisticMapper } from '../mappers/statistic.mapper';
 import { StatisticDb } from '../database-models/statistic.db';
 import { insertUserAchievement } from '../controller/database/sql';
 
 import { UserBase } from './user-base';
-import { ACHIEVEMENTS, Achievement, AchievementType } from './achievement';
+import { ACHIEVEMENTS, ACHIEVEMENT_CONDITION, Achievement, AchievementType, MAP_TYPE_TO_ACHIEVEMENT } from './achievement';
 import { Statistic } from './statistic';
 
 /** User. */
