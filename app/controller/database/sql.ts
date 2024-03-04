@@ -30,6 +30,12 @@ INSERT INTO company_address (lat, lng, title, company_id)
 VALUES (?, ?, ?, ?)
 `;
 
+/** SQL script to insert achievement. */
+export const insertAchievement = `
+INSERT INTO achievements (title, description)
+VALUES (?, ?)
+`;
+
 /** SQL script to select full company. */
 export const selectCompaniesFull = `
 SELECT
