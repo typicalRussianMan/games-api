@@ -31,11 +31,15 @@ export class UserBase {
   /** Role. */
   public readonly role: UserRole;
 
+  /** Avatar URL. */
+  public readonly avatar: string;
+
   public constructor(data: UserBase) {
     this.email = data.email;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.role = data.role;
+    this.avatar = data.avatar;
   }
 
   /**

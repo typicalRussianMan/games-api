@@ -1,3 +1,4 @@
+import { APP_CONFIG } from '../config/app.config';
 import { app } from '../controller/app.controller';
 import { AppError } from '../models/app-error';
 import { Login } from '../models/login';
@@ -34,6 +35,7 @@ app.post('/api/auth/register', async(req, res, next) => {
     await UserToCreate.createUser({
       ...req.body,
       role: UserRole.Common,
+      avatar: req.body.avatar ?? APP_CONFIG.defaultAvatar,
     });
 
     res.json(new Token({
