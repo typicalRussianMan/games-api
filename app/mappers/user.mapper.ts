@@ -19,6 +19,7 @@ IMapperFromModel<UserToCreate, StrictOmit<UserDb, 'id'>, 'creationData'> {
       id: data.id,
       lastName: data.last_name,
       role: userRoleMapper.toModel(data.role),
+      avatar: data.avatar,
     });
   }
 
@@ -30,6 +31,7 @@ IMapperFromModel<UserToCreate, StrictOmit<UserDb, 'id'>, 'creationData'> {
       last_name: data.lastName,
       password: data.password,
       role: userRoleMapper.fromModel(data.role),
+      avatar: data.avatar,
     };
   }
 }

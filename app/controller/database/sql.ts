@@ -1,9 +1,9 @@
 /** SQL script to insert new user. */
 export const insertUser = `
 INSERT INTO users
-(first_name, last_name, email, role, password)
+(first_name, last_name, email, role, password, avatar)
 VALUES
-(?, ?, ?, ?, ?);
+(?, ?, ?, ?, ?, ?);
 `;
 
 /** SQL script to insert new game category. */

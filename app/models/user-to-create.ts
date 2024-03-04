@@ -71,6 +71,7 @@ export class UserToCreate extends UserBase {
           user.email,
           user.role,
           user.password,
+          user.avatar,
         ],
       );
     } catch (err) {

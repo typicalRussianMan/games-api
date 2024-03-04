@@ -8,6 +8,7 @@ const USERS: UserToCreate[] = [
     lastName: 'Skripachev',
     password: 'qwe123qwe',
     role: UserRole.Common,
+    avatar: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
   }),
   new UserToCreate({
     email: 'Karim@qwe.qwe',
@@ -15,6 +16,7 @@ const USERS: UserToCreate[] = [
     lastName: 'Kashapov',
     password: 'qwe123qwe',
     role: UserRole.Common,
+    avatar: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
   }),
   new UserToCreate({
     email: 'Kwaka@qwe.qwe',
@@ -22,6 +24,7 @@ const USERS: UserToCreate[] = [
     lastName: 'Kwakovich',
     password: 'qwe123qwe',
     role: UserRole.Common,
+    avatar: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
   }),
   new UserToCreate({
     email: 'Nikitka@qwe.qwe',
@@ -29,6 +32,7 @@ const USERS: UserToCreate[] = [
     lastName: 'Nikov',
     password: 'qwe123qwe',
     role: UserRole.Common,
+    avatar: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
   }),
   new UserToCreate({
     email: 'Elena@qwe.qwe',
@@ -36,6 +40,7 @@ const USERS: UserToCreate[] = [
     lastName: 'Elenova',
     password: 'qwe123qwe',
     role: UserRole.Common,
+    avatar: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
   }),
   new UserToCreate({
     email: 'Owner@qwe.qwe',
@@ -43,6 +48,7 @@ const USERS: UserToCreate[] = [
     lastName: 'Ownerov',
     password: 'qwe123qwe',
     role: UserRole.CompanyOwner,
+    avatar: 'https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png',
   }),
 ];
 

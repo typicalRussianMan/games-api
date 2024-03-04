@@ -20,4 +20,7 @@ export type UserDb = {
 
   /** Password. */
   readonly password: string;
+
+  /** Avatar URL. */
+  readonly avatar: string;
 };
