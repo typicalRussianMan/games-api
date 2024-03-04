@@ -18,5 +18,4 @@ database.serialize();
   await runAsync('UPDATE games SET play_count=1565 WHERE id=2');
   await runAsync('UPDATE games SET play_count=182483 WHERE id=3');
   await runAsync('UPDATE games SET play_count=999999999 WHERE id=4');
-  await runAsync('UPDATE statistics SET games_played=15 WHERE user_id=1');
 })();
