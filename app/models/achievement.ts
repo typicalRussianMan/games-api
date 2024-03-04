@@ -15,6 +15,17 @@ export enum AchievementType {
   BestUser3 = 'BestUser3',
 }
 
+/** Achievements. */
+export const ACHIEVEMENTS: readonly AchievementType[] = [
+  AchievementType.FirstTimeVisited,
+  AchievementType.BestUser1,
+  AchievementType.BestUser2,
+  AchievementType.BestUser3,
+  AchievementType.Player1,
+  AchievementType.Player2,
+  AchievementType.Player3,
+];
+
 /** Achievement. */
 export class Achievement {
 

@@ -1,6 +1,8 @@
 import { Achievement, AchievementType } from '../../../models/achievement';
+import { User } from '../../../models/user';
 
-const MAP_TYPE_TO_ACHIEVEMENT: Record<AchievementType, Achievement> = {
+/** Type to achievement. */
+export const MAP_TYPE_TO_ACHIEVEMENT: Record<AchievementType, Achievement> = {
   [AchievementType.FirstTimeVisited]: new Achievement({
     description: 'Enter the app for the first time',
     id: 1,
@@ -36,6 +38,34 @@ const MAP_TYPE_TO_ACHIEVEMENT: Record<AchievementType, Achievement> = {
     id: 7,
     title: 'Best User III',
   }),
+};
+
+const falsyPromise = (): Promise<boolean> => new Promise(res => {
+  res(false);
+});
+
+const trulyPromise = (): Promise<boolean> => new Promise(res => {
+  res(true);
+});
+
+/** Conditions whether if can give achievement to the user. */
+export const ACHIEVEMENT_CONDITION: Record<AchievementType, (user: User) => Promise<boolean>> = {
+  [AchievementType.FirstTimeVisited]: trulyPromise,
+  [AchievementType.BestUser1]: falsyPromise,
+  [AchievementType.BestUser2]: falsyPromise,
+  [AchievementType.BestUser3]: falsyPromise,
+  async [AchievementType.Player1](user) {
+    const stats = await User.getStatistic(user);
+    return stats.gamesPlayed >= 1;
+  },
+  async [AchievementType.Player2](user) {
+    const stats = await User.getStatistic(user);
+    return stats.gamesPlayed >= 10;
+  },
+  async [AchievementType.Player3](user) {
+    const stats = await User.getStatistic(user);
+    return stats.gamesPlayed >= 100;
+  },
 };
 
 /** Adds achievements to the database. */

@@ -25,3 +25,27 @@ app.get('/api/user', async(req, res, next) => {
     next(err);
   }
 });
+
+app.get('/api/user/check-achievements', async(req, res, next) => {
+  try {
+    const authToken = req.headers.authorization;
+
+    if (authToken === undefined) {
+      throw new AuthorizationError('No provided token in `Authorization` header');
+    }
+
+    const token = parseToken(authToken);
+
+    const user = await User.getByEmail(token.email);
+
+    if (user === null) {
+      throw new AuthorizationError('Cannot find user with such email');
+    }
+
+    const newAchievements = await User.checkAchievements(user);
+
+    res.json(newAchievements);
+  } catch (err) {
+    next(err);
+  }
+});
