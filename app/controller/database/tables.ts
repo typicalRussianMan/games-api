@@ -73,7 +73,7 @@ CREATE TABLE user_achievement (
 const INIT_TABLE_STATISTICS = `
 CREATE TABLE statistics (
   user_id integer primary key,
-  games_played integer default 0 not null,
+  games_played integer default 0 not null
 );
 `;
 
