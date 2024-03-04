@@ -4,6 +4,7 @@ import { runAsync } from '../controller/database/utils/run-async';
 
 import { UserBase } from './user-base';
 import { ValidationError } from './app-error';
+import { User } from './user';
 
 /**
  * Throws validation error.
@@ -74,6 +75,10 @@ export class UserToCreate extends UserBase {
           user.avatar,
         ],
       );
+      const createdUser = await User.getByEmail(user.email);
+      if (createdUser !== null) {
+        await runAsync(`INSERT INTO statistics(user_id) VALUES (${createdUser.id})`);
+      }
     } catch (err) {
       throwError('email', 'User is already exists');
     }

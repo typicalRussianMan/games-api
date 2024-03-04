@@ -5,6 +5,7 @@ import { addCompanies } from './preload-data/companies';
 import { addGames } from './preload-data/games';
 import { VIEWS } from './views';
 import { runAsync } from './utils/run-async';
+import { addAchievements } from './preload-data/achievements';
 
 /**
  * Initializes database.
@@ -25,6 +26,8 @@ export async function initDatabase(): Promise<void> {
   console.log('✓ Insert companies');
   await addGames();
   console.log('✓ Insert mock users');
+  await addAchievements();
+  console.log('✓ Prepare achievements');
 }
 
 /**

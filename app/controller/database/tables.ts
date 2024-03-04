@@ -52,6 +52,31 @@ CREATE TABLE games (
 );
 `;
 
+const INIT_TABLE_ACHIEVEMENTS = `
+CREATE TABLE achievements (
+  id integer primary key autoincrement,
+  title text not null,
+  description text not null
+);
+`;
+
+const INIT_TABLE_USER_ACHIEVEMENT = `
+CREATE TABLE user_achievement (
+  id integer primary key autoincrement,
+  achievement_id integer,
+  user_id integer,
+  foreign key(achievement_id) references achievements(id),
+  foreign key(user_id) references users(id)
+)
+`;
+
+const INIT_TABLE_STATISTICS = `
+CREATE TABLE statistics (
+  user_id integer primary key,
+  games_played integer default 0 not null
+);
+`;
+
 /** Database tables. */
 export const TABLES = [
   INIT_TABLE_USERS,
@@ -59,4 +84,7 @@ export const TABLES = [
   INIT_TABLE_COMPANIES,
   INIT_COMPANY_ADDRESS,
   INIT_TABLE_GAMES,
+  INIT_TABLE_ACHIEVEMENTS,
+  INIT_TABLE_USER_ACHIEVEMENT,
+  INIT_TABLE_STATISTICS,
 ] as const;
