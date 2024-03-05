@@ -38,6 +38,14 @@ Returns updated user achievements by token in Authorization header.
 | :--------: | :-------: |
 | - | [AchievementDto](#achievementdto)[] |
 
+### [GET] /api/user/profile
+
+Returns user profile by token in Authorization header.
+
+| Accepts    | Returns   |
+| :--------: | :-------: |
+| - | [ProfileDto](#profiledto) |
+
 ### [GET] /api/games/categories
 
 Returns list of the game categories.
@@ -313,6 +321,35 @@ interface AchievementDto {
   readonly description: string;
 }
 ```
+
+### ProfileDto
+
+```ts
+interface ProfileDto extends UserDto {
+
+  /** Achievements. */
+  readonly achievements: AchievementFullDto[];
+}
+```
+
+It depends on:
+
+- [UserDto](#userdto)
+- [AchievementFullDto](#achievementfulldto)
+
+### AchievementFullDto
+
+```ts
+interface AchievementFullDto extends AchievementDto {
+
+  /** Whether is achievement is collected. */
+  readonly isCollected: boolean;
+}
+```
+
+It depends on:
+
+- [AchievementDto](#achievementdto)
 
 ## Error models
 
