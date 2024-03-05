@@ -86,8 +86,6 @@ export class Game {
     const result = await allAsync<GameDb>(sql, [limit, offset]);
     const [{ count }] = await allAsync<CountDb>(selectGamesCount);
 
-    console.log(result);
-
     return new PagedList({
       limit,
       items: result.map(gameMapper.toModel),
